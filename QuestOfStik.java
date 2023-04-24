@@ -17,7 +17,10 @@ public class QuestOfStik {
 		double dbl5Answer;
 		boolean bolBadMath = false;
 		boolean bolPastBridge = false;
-		
+		argue(con);
+		while(!bolBadMath){
+			
+		}
 		intro(con);
 		while(chrInput!=',' && chrInput!='.'){
 			//keeps repeating until you press < or >
@@ -296,7 +299,16 @@ public class QuestOfStik {
 	}
 	public static void stabbington(Console con){
 		//scene 4
-		con.println("stabbington. past, argue, or duel");
+		con.clear();
+		con.setTextColor(Color.BLACK);
+		con.setDrawColor(Color.BLACK);
+		BufferedImage imgStabbington = con.loadImage("stabbington.jpg");
+		con.println("You end up seeing Sir Stabbington.");
+		con.println("Do you ARGUE with them about whether or not stabbin' is ok?");
+		con.println("Do you just walk PAST them?");
+		con.println("Or do you challenge them to a stabbin' DUEL ?");
+		con.drawImage(imgStabbington,0,0);
+		con.drawString("I like stabbin' people I don't like, its fun :>",640,145);
 	}
 	public static void bridgeFall(Console con){
 		//scene 5
@@ -304,6 +316,10 @@ public class QuestOfStik {
 	}
 	public static void heavenGates(Console con){
 		//scene 6
+		BufferedImage imgDead = con.loadImage("DEAD.jpg");
+		con.drawImage(imgDead,0,0);
+		con.repaint();
+		con.sleep(3000);
 		BufferedImage imgHeavenGates = con.loadImage("heavenGates.jpg");
 		con.println("Stik ends up at the gates of heaven");
 		con.drawImage(imgHeavenGates,0,0);
@@ -324,7 +340,42 @@ public class QuestOfStik {
 	}
 	public static void argue(Console con){
 		//scene 9
-		con.println("argue.");
+		int intCount;
+		BufferedImage imgArgue = con.loadImage("argue.jpg");
+		BufferedImage imgDagger = con.loadImage("dagger.jpg");
+		con.clear();
+		con.setTextColor(Color.BLACK);
+		con.setDrawColor(Color.BLACK);
+		for(intCount = 1000;intCount >= -3000; intCount -= 30){
+			con.drawImage(imgArgue,0,0);
+			//all this text is made by chatGPT just saying
+			con.drawString("Good sir knight, I humbly implore you to hear me out on this matter of grave importance. As a fellow human being, I beseech you to consider the moral implications of your actions, specifically the act of stabbing other people.",intCount,60);
+			con.drawString("Firstly, let us acknowledge that every human being has the right to life and bodily integrity. It is a basic tenet of any civilized society that individuals should be free from harm caused by others. By stabbing someone, you are violating this fundamental right and causing harm to another human being, which is not only morally reprehensible but also illegal.",intCount,180);
+			con.drawString("Moreover, consider the potential consequences of your actions. By stabbing someone, you risk causing permanent physical damage, including severe injury, disability, or even death. You also risk causing emotional trauma and psychological harm, not only to the victim but also to their loved ones.",intCount,300);
+			con.drawString("Furthermore, let us reflect on the values that we as a society hold dear. Compassion, empathy, and respect for others are among the most cherished human virtues. By stabbing someone, you are displaying a lack of these virtues and instead promoting violence, aggression, and cruelty. These values have no place in a just and compassionate society, and we must strive to uphold the dignity of every human being.",intCount,420);
+			con.drawString("Lastly, I implore you to consider the long-term effects of your actions. Violence begets violence, and a cycle of revenge and retaliation can ensue, perpetuating harm and suffering for generations to come. We must break this cycle and seek peaceful and nonviolent solutions to our problems.",intCount,540);
+			con.drawString("In conclusion, my dear knight, I urge you to reflect on the moral and ethical implications of your actions. The act of stabbing another human being is not only wrong but also a violation of the basic human rights that we all hold dear. Let us strive to uphold the values of compassion, empathy, and respect for others and seek peaceful solutions to our problems.",intCount,660);
+			con.repaint();
+			con.sleep(33);
+		}
+		for(intCount = 1000;intCount >= -400; intCount -=100){
+			con.setDrawColor(Color.WHITE);
+			con.fillRect(0,0,1280,720);
+			con.repaint();
+			con.setDrawColor(Color.BLACK);
+			con.drawImage(imgDagger,intCount,200);
+			con.fillRect(intCount + 426, 300,100000,20);
+			con.repaint();
+			con.sleep(33);
+		}
+		
+	}
+	public static void duelChallenge(Console con){
+		//scene 10
+		BufferedImage imgDuelChallenge = con.loadImage("duelChallenge.jpg");
+		con.drawImage(imgDuelChallenge,0,0);
+		con.drawString("I challenge you to a stabbin' duel!!",100,260);
+		con.repaint();
 	}
 	public static void right(Console con){
 		//scene 13
