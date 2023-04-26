@@ -17,7 +17,8 @@ public class QuestOfStik {
 		double dbl5Answer;
 		boolean bolBadMath = false;
 		boolean bolPastBridge = false;
-		argue(con);
+		
+		duelWin(con);
 		while(!bolBadMath){
 			
 		}
@@ -223,9 +224,13 @@ public class QuestOfStik {
 			}
 		}
 		if(intMorality >= 0){
+			angelTalk(con,intMorality,"ok you passed, welcome to heaven");
+			con.sleep(2000);
 			heavenDance(con);
 			//ENDING 1
 		}else{
+			angelTalk(con,intMorality,"YOU FAILED!! You're going STRAIGHT TO HECC!!!!");
+			con.sleep(2000);
 			hecc(con);
 			//ENDING 2
 		}
@@ -254,7 +259,14 @@ public class QuestOfStik {
 				argue(con);
 				death(con);
 			}else if(strInput.equalsIgnoreCase("duel")){
-				
+				duelChallenge(con);
+				if(con.currentChar() == ' '){
+					duelWin(con);
+					emerald(con);
+				}else{
+					duelLose(con);
+					death(con);
+				}
 			}
 		}
 	}
@@ -312,7 +324,36 @@ public class QuestOfStik {
 	}
 	public static void bridgeFall(Console con){
 		//scene 5
-		con.println("bridgeFall.");
+		con.clear();
+		BufferedImage imgBridgeFall1 = con.loadImage("bridgeFall1.png");
+		BufferedImage imgBridgeFall2 = con.loadImage("bridgeFall2.png");
+		BufferedImage imgBridgeFall3 = con.loadImage("bridgeFall3.png");
+		int intCount;
+		for(intCount = -500; intCount <= 700; intCount += 40){
+			con.setDrawColor(Color.WHITE);
+			con.fillRect(0,0,1280,720);
+			con.setDrawColor(Color.BLACK);
+			con.fillRect(0,600,640,120);
+			con.drawImage(imgBridgeFall1,intCount,100);
+			con.repaint();
+			con.sleep(33);
+		}
+		con.setDrawColor(Color.WHITE);
+		con.fillRect(0,0,1280,720);
+		con.setDrawColor(Color.BLACK);
+		con.fillRect(0,600,640,120);
+		con.drawImage(imgBridgeFall2,700,100);
+		con.repaint();
+		con.sleep(1500);
+		for(intCount = 100; intCount <= 720; intCount += 40){
+			con.setDrawColor(Color.WHITE);
+			con.fillRect(0,0,1280,720);
+			con.setDrawColor(Color.BLACK);
+			con.fillRect(0,600,640,120);
+			con.drawImage(imgBridgeFall3,700,intCount);
+			con.repaint();
+			con.sleep(33);
+		}
 	}
 	public static void heavenGates(Console con){
 		//scene 6
@@ -343,10 +384,11 @@ public class QuestOfStik {
 		int intCount;
 		BufferedImage imgArgue = con.loadImage("argue.jpg");
 		BufferedImage imgDagger = con.loadImage("dagger.jpg");
+		BufferedImage imgStabbed = con.loadImage("stabbed.jpg");
 		con.clear();
 		con.setTextColor(Color.BLACK);
 		con.setDrawColor(Color.BLACK);
-		for(intCount = 1000;intCount >= -3000; intCount -= 30){
+		for(intCount = -2500;intCount <= 0; intCount += 30){
 			con.drawImage(imgArgue,0,0);
 			//all this text is made by chatGPT just saying
 			con.drawString("Good sir knight, I humbly implore you to hear me out on this matter of grave importance. As a fellow human being, I beseech you to consider the moral implications of your actions, specifically the act of stabbing other people.",intCount,60);
@@ -368,14 +410,87 @@ public class QuestOfStik {
 			con.repaint();
 			con.sleep(33);
 		}
-		
+		con.drawImage(imgStabbed,0,0);
+		con.fillRoundRect(700,100,20,100,10,10);
+		con.fillRoundRect(800,100,20,100,10,10);
+		con.repaint();
+		con.sleep(800);
+		for(intCount = 100; intCount <= 200; intCount += 2){
+			con.drawImage(imgStabbed,0,0);
+			con.fillRoundRect(700,intCount,20,100,10,10);
+			con.fillRoundRect(800,intCount,20,100,10,10);
+			con.repaint();
+			con.sleep(33);
+		}
+		con.sleep(1500);
 	}
 	public static void duelChallenge(Console con){
 		//scene 10
 		BufferedImage imgDuelChallenge = con.loadImage("duelChallenge.jpg");
+		BufferedImage imgDuelSword = con.loadImage("duelSword.jpg");
+		BufferedImage imgDagger = con.loadImage("dagger.jpg");
+		int intCount;
 		con.drawImage(imgDuelChallenge,0,0);
 		con.drawString("I challenge you to a stabbin' duel!!",100,260);
 		con.repaint();
+		con.sleep(3000);
+		con.drawImage(imgDuelSword,0,0);
+		con.drawString("Ok, here's your sword",700,100);
+		con.repaint();
+		con.sleep(3000);
+		con.drawImage(imgDuelSword,0,0);
+		con.drawString("Get ready to press space as soon as my blade flies by",600,100);
+		con.repaint();
+		con.sleep((int)(Math.random()*4000+3000));
+		for(intCount = 1000;intCount >= -400 && con.currentChar() != ' '; intCount -= 150){
+			con.setDrawColor(Color.WHITE);
+			con.fillRect(0,0,1280,720);
+			con.repaint();
+			con.setDrawColor(Color.BLACK);
+			con.drawImage(imgDagger,intCount,200);
+			con.fillRect(intCount + 426, 300,100000,20);
+			con.repaint();
+			con.sleep(33);
+		}
+	}
+	public static void duelLose(Console con){
+		//scene 11
+		int intCount;
+		BufferedImage imgStabbed = con.loadImage("stabbed.jpg");
+		con.clear();
+		con.setDrawColor(Color.BLACK);
+		con.println("duelLose.");
+		con.drawImage(imgStabbed,0,0);
+		con.fillRoundRect(700,100,20,100,10,10);
+		con.fillRoundRect(800,100,20,100,10,10);
+		con.repaint();
+		con.sleep(800);
+		for(intCount = 100; intCount <= 200; intCount += 2){
+			con.drawImage(imgStabbed,0,0);
+			con.fillRoundRect(700,intCount,20,100,10,10);
+			con.fillRoundRect(800,intCount,20,100,10,10);
+			con.repaint();
+			con.sleep(33);
+		}
+		con.sleep(1500);
+	}
+	public static void duelWin(Console con){
+		//scene 12
+		BufferedImage imgDuelJump = con.loadImage("duelJump.png");
+		BufferedImage imgDuelClink = con.loadImage("duelClink.png");
+		BufferedImage imgDuelBg = con.loadImage("duelBg.jpg");
+		BufferedImage imgDuelWon = con.loadImage("duelWon.jpg");
+		int intCount;
+		int intVelocity = -20;
+		int intCountY = 300;
+		for(intCount = 200; intCount <= 670; intCount += 30){
+			con.drawImage(imgDuelBg,0,0);
+			con.drawImage(imgDuelJump,intCount,intCountY);
+			intVelocity += 2;
+			intCountY += intVelocity;
+			con.repaint();
+			con.sleep(33);
+		}
 	}
 	public static void right(Console con){
 		//scene 13
@@ -403,11 +518,55 @@ public class QuestOfStik {
 	}
 	public static void heavenDance(Console con){
 		//scene 19
-		con.println("heavenDance.");
+		BufferedImage imgHeavenEnter = con.loadImage("heavenEnter.jpg");
+		BufferedImage imgHeavenNotice = con.loadImage("heavenNotice.jpg");
+		BufferedImage imgHeavenDanceFloor = con.loadImage("heavenDanceFloor.jpg");
+		BufferedImage imgHeavenDance1 = con.loadImage("heavenDance1.png");
+		BufferedImage imgHeavenDance2 = con.loadImage("heavenDance2.png");
+		con.clear();
+		con.drawImage(imgHeavenEnter,0,0);
+		con.drawString("Oh nice, I'm in heaven now!",400,200);
+		con.repaint();
+		con.sleep(2000);
+		con.drawImage(imgHeavenNotice,0,0);
+		con.drawString("WAIT IS THAT A DANCE PARTY!?!?!",500,200);
+		con.repaint();
+		con.sleep(2000);
+		while(true){
+			con.drawImage(imgHeavenDanceFloor,0,0);
+			con.drawImage(imgHeavenDance1,200,200);
+			con.drawString("ENDING 1: Heaven",0,0);
+			con.repaint();
+			con.sleep(500);
+			con.drawImage(imgHeavenDanceFloor,0,0);
+			con.drawImage(imgHeavenDance2,200,200);
+			con.drawString("ENDING 1: Heaven",0,0);
+			con.repaint();
+			con.sleep(500);
+		}
 	}
 	public static void hecc(Console con){
 		//scene 20
-		con.println("hecc.");
+		con.clear();
+		BufferedImage imgHeccEnter = con.loadImage("heccEnter.jpg");
+		BufferedImage imgHeccCry = con.loadImage("heccCry.jpg");
+		con.drawImage(imgHeccEnter,0,0);
+		con.drawString("You know, this isn't actually that bad!",650,280);
+		con.repaint();
+		con.sleep(3000);
+		con.drawImage(imgHeccEnter,0,0);
+		con.drawString("It's nice and warm in here :)",650,280);
+		con.repaint();
+		con.sleep(3000);
+		con.drawImage(imgHeccCry,0,0);
+		con.drawString("ENDING 2: Hecc",0,0);
+		con.drawString("NOOOOOO!!!!!",800,200);
+		con.drawString("You SURE about that!?!?!",50,200);
+		con.drawString("*vocaloid english dubs*",400,200);
+		con.repaint();
+		while(true){
+			//Nothing in here so it just does nothing forever
+		}
 	}
 	public static void emerald(Console con){
 		//scene 21
